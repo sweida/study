@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title> vue起步</title>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+
+</head>
+
+<body>
+
+    <div id="api">{{hello}}</div>
+    <div id="app">{{ message }}</div>
+    <div id="app2">
+        <span v-bind:title="message">
+            这是随便一段文字
+        </span>
+    </div>
+
+    <div id="app3">
+        <p v-if="seen">这段文字要显示</p>
+    </div>
+
+    <div id="app4">
+        <p v-if="seen">这段文字不显示</p>
+    </div>
+
+    <!-- 遍历 -->
+    <div id="app5">
+        <ol>
+            <li v-for="todo in todos">{{todo.text}}</li>
+        </ol>
+    </div>
+
+    <!-- 双向数据绑定 -->
+    <div id="app6">
+        <p>{{message}}</p>
+        <input v-model="message" value="{{message}}">
+    </div>
+    <!-- 缩写 -->
+    <div id="app7">
+        <span :title="message">
+            这是随便一段文字
+        </span>
+    </div>
+
+    <div id="app8">{{fullname}}</div>
+    <br>
+遍历1~10
+<div class="okk"> <span v-for="n in 10">{{ n }}</span> </div>
+
+<p v-show="okay">okay</p> 
+<p v-show="!okay">not okay</p>
+
+<div class="okk2">
+    <h1 v-if="ok">Yes</h1> 
+    <h1 v-else>No</h1>
+</div>
+
+<div id="box">
+    <input type="button" value="添加一个水果" v-on:click="add()">
+    <ul>
+        <li v-for="value in arr">{{value}} </li>
+
+
+    </ul>
+    <ul>
+        <!-- <li v-for="(k,v) in json"> {{v}} {{k}} {{$index}}</li> -->
+        <li v-for="value in json"> {{value}} {{$index}}</li>
+    </ul>
+</div>
+<div id="showw">
+    <input type="button" value="隐藏按钮" v-on:click="a=false">
+    <div style="width:100px;height:100px;background:red;" v-show="a"></div>
+</div>
+
+<div id="example">
+    <my-component></my-component>
+</div>
+
+
+
+    <script>
+    Vue.component('my-component',{
+        template:'<div>我是组件</div>'
+    })
+    new Vue({
+        el:'#example'
+    })
+    var box = new Vue({
+        el:'#box',
+        data:{
+            arr:['apple','banner','orange'],
+            json:{a:'apple',b:'orange',c:'banner'}
+        },
+        methods:{
+            add:function(){
+                this.arr.push('tomato');
+            }
+        }
+    })
+    var showw = new Vue({
+        el:'#showw',
+        data:{
+            a:true
+        }
+    })
+    var api = new Vue({
+        el:'#api',
+        data:{hello:'hello vue'}
+    });
+    var okk = new Vue({
+        el:'.okk',
+        // data:{}
+    })
+    var okk2 = new Vue({
+        el:'.okk2',
+        // data:{}
+    })
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        }
+    });
+    var app2 = new Vue({
+        el:'#app2',
+        data:{message:'这是标题，加上时间' + new Date()}
+    });
+    var app3 = new Vue({
+        el:'#app3',
+        data:{seen:true}
+    });
+    var app4 = new Vue({
+        el:'#app4',
+        data:{seen:false}
+    });
+    var app5 = new Vue({
+        el:'#app5',
+        data:{
+            todos:[
+                {text:'这是第一行'},
+                {text:'这是第二行'},
+                {text:'这是第三行'}
+            ]
+        }
+    })
+    var app6 = new Vue({
+        el:'#app6',
+        data:{message:'我是双向数据绑定的文字'}
+    })
+    var app7 = new Vue({
+        el:'#app7',
+        data:{message:'这是标题，加上时间' + new Date()}
+    });
+
+    var app8 = new Vue({
+        el:'#app8',
+        data:{
+            firstname:'dada',
+            lastname:'BB'
+        },
+        computed:{
+            fullname: function(){
+                return this.firstname + ' ' + this.lastname
+            }
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+</body>
+</html>
